@@ -26,18 +26,33 @@ SECRET_KEY = 'django-insecure-zm!sk3bi44+8&1i3%=!&-y=wt$1)v3u584v+qj%118+z@)m0h!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+TIME_ZONE = "Asia/Kolkata"
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+
+# Third Party Apps
+'rest_framework',
+'drf_spectacular',
+
+# Local Apps
+'accounts',
+'organizations',
+'orders',
+'workflows',
+'notifications',
+'ai_agents',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,3 +130,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Custom User Model
+
+AUTH_USER_MODEL = "accounts.User"
+
+# Django REST Framework
+
+REST_FRAMEWORK = {
+"DEFAULT_AUTHENTICATION_CLASSES": (
+"rest_framework_simplejwt.authentication.JWTAuthentication",
+),
+"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# Swagger / OpenAPI
+
+SPECTACULAR_SETTINGS = {
+"TITLE": "OrchestrAI API",
+"DESCRIPTION": "AI-Powered Workflow Orchestration Platform",
+"VERSION": "1.0.0",
+}
+
